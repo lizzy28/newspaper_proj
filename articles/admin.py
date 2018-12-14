@@ -1,10 +1,18 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Article, Comment
 
 
-from django.contrib import admin
+class CommentInline(admin.TabularInline):
+    model = Comment
 
-from .models import Article
 
-admin.site.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
+    inlines = [
+        CommentInline,
+
+    ]
+
+
+admin.site.register(Article,ArticleAdmin)
+admin.site.register(Comment)
